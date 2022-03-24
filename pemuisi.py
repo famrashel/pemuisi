@@ -1,7 +1,8 @@
 import os
 import sys
-import time
 import argparse
+
+from datetime import datetime
 
 ###############################################################################
 
@@ -40,15 +41,6 @@ def read_argv():
 						
 	return parser.parse_args()
 
-def convert_time(duration):
-	"""
-	Convert time data (s) to human-friendly format
-	"""
-	m, s = divmod(round(duration), 60)
-	h, m = divmod(m, 60)
-	hms = "%d:%02d:%02d" % (h, m,s)
-	return hms
-
 ###############################################################################
 def _test():
 	import doctest
@@ -66,6 +58,6 @@ if __name__ == '__main__':
 	if options.test:
 		_test()
 
-	t_start = time.time()
+	t_start = datetime.now()
 	main(sys.stdin)
-	if options.verbose: print(f'# {os.path.basename(__file__)} - Processing time: {(convert_time(time.time() - t_start))}', file=sys.stderr)
+	if options.verbose: print(f'# {os.path.basename(__file__)} - Processing time: {((datetime.now() - t_start))}', file=sys.stderr)
